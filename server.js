@@ -3,15 +3,21 @@ const app = express()
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 
 /// ROUTER FILE STARTED ///
 // const routes = require(./Router)
 // app.use(routes)
+const cors = require('cors')
+app.use(cors())
+const knex = require('./db')
 
-app.use(function(req, res) {
-  res.send('Welcome to my Q2 Project Yo!!!')
+app.get('/recipes',(err, req, res, next) => {
+  knex('recipes').then((recipe) => {
+    console.log(recipe)
+    res.send(recipe)
+  })
 })
 
 app.use((err, req,res,next) => {
