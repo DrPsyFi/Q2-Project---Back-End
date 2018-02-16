@@ -9,13 +9,22 @@ app.use(bodyParser.json())
 /// ROUTER FILE STARTED ///
 // const routes = require(./Router)
 // app.use(routes)
+
 const cors = require('cors')
 app.use(cors())
 const knex = require('./db')
 
-app.get('/recipes',(err, req, res, next) => {
+app.get('/recipes',(req, res) => {
   knex('recipes').then((recipe) => {
     console.log(recipe)
+    res.send(recipe)
+  })
+})
+
+app.get('/recipes/:id',(req, res) => {
+  let recipieId =req.params.id
+  knex('recipes').where("id", recipieId).first()
+  .then((recipe) => {
     res.send(recipe)
   })
 })
