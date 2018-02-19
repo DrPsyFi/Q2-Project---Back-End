@@ -1,22 +1,38 @@
 const baseURL = 'http://localhost:3000'
 
-function getThisRecipe(newRecipe) {
+
+
+function getThisRecipe(myRecipe) {
+  let id = window.location.search.slice(4)
   let title = document.querySelector("#createHead")
   let recPic = document.querySelector('#recipePic')
   let ingredList = document.querySelector('#ingredients')
   let directions = document.querySelector('#instructions')
 
-  axios.get(`${baseURL}/recipes/`)
+  axios.get(`${baseURL}/recipes/` + id )
     .then(result => {
-      console.log(result.data);
-    title.innerText = result.data.name
-    // const picImage = document.createElement('img')
-    // picImage.setAttribute('src', result.data.picture)
+    let myRecipe = result.data
+     //console.log(myRecipe)
+    title.innerText = myRecipe.recipe
     recPic.setAttribute('src', result.data.picture)
     ingredList.innerText = "Ingredients are a coming soon feature"
-    directions.innerText = result.data.instructions
-
-    })
+    directions.innerText = myRecipe.instructions
+  })
 }
+
+  // let title = document.querySelector("#createHead")
+  // let recPic = document.querySelector('#recipePic')
+  // let ingredList = document.querySelector('#ingredients')
+  // let directions = document.querySelector('#instructions')
+
+  // axios.get(`${baseURL}`/recipes)
+  //   .then(result => {
+  //
+  //     title.innerText = result.data.recipe
+  //     recPic.setAttribute('src', result.data.picture)
+  //     ingredList.innerText = "Ingredients are a coming soon feature"
+  //     directions.innerText = result.data.instructions
+  //
+  //   })
 
 getThisRecipe()
