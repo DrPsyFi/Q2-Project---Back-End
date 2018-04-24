@@ -4,8 +4,12 @@
   "description": "Recipe Saver App",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "mocha",
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "knex": "knex",
+    "latest": "knex migrate:latest",
+    "rollback": "knex migrate:rollback"
   },
   "repository": {
     "type": "git",
@@ -19,12 +23,18 @@
   "homepage": "https://github.com/DrPsyFi/Q2-Project---Back-End#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.1",
     "knex": "^0.14.3",
     "morgan": "^1.9.0",
     "pg": "^7.4.1",
     "save": "^2.3.2"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1",
+    "nodemon": "^1.17.3"
   }
 }
