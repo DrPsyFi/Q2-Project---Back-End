@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.text('notes').notNullable()
     table.integer('rating').defaultTo(0)
-    table.integer('users_id').references('users.id')
+    table.integer('user_id').references('user.id')
     table.integer('recipe_id').references('recipe.id')
     table.timestamps(true, true)
   })

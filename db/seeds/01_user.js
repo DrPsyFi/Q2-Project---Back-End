@@ -1,4 +1,4 @@
-const TABLE_NAME = 'users'
+const TABLE_NAME = 'user'
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex(TABLE_NAME).del()

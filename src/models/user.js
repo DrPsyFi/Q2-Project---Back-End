@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt-as-promised')
 
 function getOneByUserName(username){
   return (
-    db('users')
+    db('user')
     .where({ username })
     .first()
   )
@@ -39,7 +39,7 @@ function create(username, password){
 
     // 3. Insert record into database
     return (
-      db('users')
+      db('user')
       .insert({ username, password: hashedPassword })
       .returning('*')
     )

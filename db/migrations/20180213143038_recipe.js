@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.text('ingredients').notNullable()
     table.text('instructions').notNullable()
     table.string('picture').defaultTo('Coming Soon!')
-    table.integer("users_id").references('users.id')
+    table.integer("user_id").references('user.id')
     table.timestamps(true, true)
   })
 };

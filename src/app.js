@@ -7,6 +7,7 @@ const authController = require('./controllers/auth')
 
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').load()
+}
 
 
 const app = express()
@@ -17,36 +18,28 @@ app.use(bodyParser.json())
 
 
 
-
 //////////////////////////////////////////////////////////////////////////////
 // Routes
 //////////////////////////////////////////////////////////////////////////////
 
 app.use('/auth', require('./routes/auth'))
-app.use('/users', require('./routes/users'))
+app.use('/user', require('./routes/user'))
+app.use('/recipe', require('./routes/recipe'))
+app.use('/notes', require('./routes/notes'))
 
 
 
-
-
-
-
-
-
-
-
-
-app.get('/recipes',(req, res) => {
-  knex('recipes').then((recipe) => {
+app.get('/recipe',(req, res) => {
+  knex('recipe').then((recipe) => {
     res.send(recipe)
   })
 })
 
-app.get('/recipes/:id',(req, res) => {
+app.get('/recipe/:id',(req, res) => {
   let recipieId =req.params.id
-  knex('recipes').where("id", recipieId).first()
+  knex('recipe').where("id", recipieId).first()
   .then((recipe) => {
-    console.log(recipe, "server")
+
     res.send(recipe)
   })
 })
