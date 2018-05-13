@@ -29,6 +29,7 @@ function getOneRecipe(userid, recipeid){
   )
 }
 
+
 function getNotes(userid, recipesid) {
   return (
     db('notes')
@@ -88,7 +89,7 @@ function createRecipe(users_id,recName, instructions, ingredients, picture) {
   })
 }
 
-function createNotes(users_id, recipes_id,notes, rating) {
+function createNotes(users_id, recipes_id, notes, rating) {
   return (
     db('notes')
     .insert({users_id, recipes_id, notes, rating})
@@ -100,8 +101,20 @@ function createNotes(users_id, recipes_id,notes, rating) {
   })
   }
 
+function updateRecipe(users_id,recName, instructions, ingredients, picture) {
+  return (
+    db('recipes')
+    .insert({users_id, recName, instructions, ingredients, picture})
+    .returning('*')
+  )
+  .then(function([data]){
+    console.log(data)
+    return data
+  })
+  }
+
 function deleteRecipe(id) {
-  console.log(id, "model")
+
   return (
     db('notes')
     .delete()
@@ -126,5 +139,6 @@ module.exports = {
   create,
   createRecipe,
   createNotes,
-  deleteRecipe
+  deleteRecipe,
+  updateRecipe,
 }

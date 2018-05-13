@@ -80,7 +80,7 @@ function createNotes(req, res, next) {
   }
 
 function deleteRecipe(req, res, next) {
-  console.log(req.params, "control")
+
   if(!req.params.recipeid) {
     return next({ status:400, message: "No recipe with that id."})
   }
@@ -89,6 +89,16 @@ function deleteRecipe(req, res, next) {
     return res.status(201).send({ data })
   })
 }
+
+function updateRecipe(req, res, next) {
+  if(!req.params.recipeid) {
+    return next({ status:400, message: "There is no recipe with that Id."})
+  }
+  userModel.updateRecipe(req.params.recipeid)
+  .then(function(data){
+    return res.status(201).send({ data })
+  })
+  }
 
 //////////////////////////////////////////////////////////////////////////////
 // Quality of Life functions
@@ -102,4 +112,5 @@ module.exports = {
   getNotes,
   createNotes,
   deleteRecipe,
+  updateRecipe,
 }
