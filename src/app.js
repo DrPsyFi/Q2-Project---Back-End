@@ -6,7 +6,7 @@ const cors = require('cors')
 const authController = require('./controllers/auth')
 
 if(process.env.NODE_ENV !== 'production'){
-  require('dotenv').load()
+  require('dotenv').config()
 }
 
 
@@ -23,26 +23,11 @@ app.use(bodyParser.json())
 //////////////////////////////////////////////////////////////////////////////
 
 app.use('/auth', require('./routes/auth'))
-app.use('/user', require('./routes/user'))
-app.use('/recipe', require('./routes/recipe'))
-app.use('/notes', require('./routes/notes'))
+app.use('/users', require('./routes/user'))
 
 
 
-app.get('/recipe',(req, res) => {
-  knex('recipe').then((recipe) => {
-    res.send(recipe)
-  })
-})
 
-app.get('/recipe/:id',(req, res) => {
-  let recipieId =req.params.id
-  knex('recipe').where("id", recipieId).first()
-  .then((recipe) => {
-
-    res.send(recipe)
-  })
-})
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -58,7 +43,7 @@ app.use(function(req, res, next){
 //////////////////////////////////////////////////////////////////////////////
 app.use(function(err, req, res, next){
   const errorMessage = {}
-
+  console.log(err);
   if(process.env.NODE_ENV !== 'production' && err.stack)
     errorMessage.stack = err.stack
 

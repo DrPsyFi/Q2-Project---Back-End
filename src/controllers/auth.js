@@ -16,33 +16,48 @@ const jwt = require('jsonwebtoken')
 //////////////////////////////////////////////////////////////////////////////
 
 function login(req, res, next){
-  if(!req.body.username)next({status:400, message: 'Not Found'})
-  if(!req.body.password)next({status:400, message: 'Not Found'})
+  console.log(req.body)
+  // 1. Make sure that request is good
+  if(!req.body.username){
+    return next({ status: 400, message: 'Bad request'})
+  }
 
+  if(!req.body.password){
+
+    return next({ status: 400, message: 'Bad request 12'})
+  }
+
+  // 2. Attempt Login
   authModel.login(req.body.username, req.body.password)
-  // Attempt Login
-  .then(function(user) {
-  //Create token
-  const token = jwt.sign({id: user.id}, process.env.SECRET)
+  .then(function(user){
 
-    // Send back token
+    // 3. Create token
+    const token = jwt.sign({id: user.id}, process.env.SECRET)
+
+    // 4. Send back token
+    console.log({ token })
     return res.status(200).send({ token })
   })
   .catch(next)
 }
 
 
+function getAuthStatus(req, res, next){
+    res.status(200).send({id:req.claim.id})
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // Quality of Life functions
 //////////////////////////////////////////////////////////////////////////////
 
 function isAuthenticated(req, res, next){
-  if(!req.header.authorization){
+
+  if(!req.headers.authorization){
     return next({ status: 401, message: 'Unauthorized' })
   }
-
   const [scheme, credentials] = req.headers.authorization.split(' ')
+
+
 
   jwt.verify(credentials, process.env.SECRET, (err, payload)=>{
     if(err){
@@ -68,6 +83,7 @@ function isSelf(req, res, next){
 
 module.exports = {
   login,
+  getAuthStatus,
   isAuthenticated,
   isSelf
 }
