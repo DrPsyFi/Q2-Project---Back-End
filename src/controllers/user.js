@@ -94,7 +94,7 @@ function updateRecipe(req, res, next) {
   if(!req.params.recipeid) {
     return next({ status:400, message: "There is no recipe with that Id."})
   }
-  userModel.updateRecipe(req.params.recipeid)
+  userModel.updateRecipe(req.params.recipeid, req.body.ingredients, req.body.instructions )
   .then(function(data){
     return res.status(201).send({ data })
   })

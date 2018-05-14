@@ -101,10 +101,11 @@ function createNotes(users_id, recipes_id, notes, rating) {
   })
   }
 
-function updateRecipe(users_id,recName, instructions, ingredients, picture) {
+function updateRecipe(id, ingredients, instructions ) {
   return (
     db('recipes')
-    .insert({users_id, recName, instructions, ingredients, picture})
+    .where({id: id})
+    .update({ ingredients, instructions})
     .returning('*')
   )
   .then(function([data]){
@@ -118,7 +119,7 @@ function deleteRecipe(id) {
   return (
     db('notes')
     .delete()
-    .where({recipes_id: id})
+    .where({id: id})
   ).then(function(){
     return db("recipes")
     .delete()
