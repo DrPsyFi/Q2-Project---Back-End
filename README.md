@@ -10,7 +10,7 @@ It is currently deployed on surge at the following address:
 
     http://malicious-peace.surge.sh/
 
-If you wish to install it, can be accessed from my git hub site at:  
+If you wish to install it, it can be accessed from my git hub site.  
 
     npm install
     npm node run - to start application
