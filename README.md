@@ -20,13 +20,13 @@ The DB is PSQL
 
   Create a database with the the following CLI Commands
   
-    -createdb (dbName)
+    createdb recipeBox_dev
     
    Migrate and Seed files
    
-    -npm run knex migrate:latest
+    npm run knex migrate:latest
     
-    -npm run knex seed:run
+    npm run knex seed:run
 ___
 
 If you require any further assistance please feel free to contact me at My Git Hub Site
