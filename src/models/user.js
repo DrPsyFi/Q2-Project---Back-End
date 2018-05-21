@@ -119,7 +119,7 @@ function deleteRecipe(id) {
   return (
     db('notes')
     .delete()
-    .where({id: id})
+    .where({recipes_id: id})
   ).then(function(){
     return db("recipes")
     .delete()
