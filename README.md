@@ -1,18 +1,37 @@
 # Q2-Project
-Recipe Box Storage Application
 
-Hello and welcome to the app.  
+---
+### Recipe Box Storage Application
+---
 
-It is currently deployed on surge at the following address :
+#### Hello and welcome to the app.  
 
-  http://malicious-peace.surge.sh/
+It is currently deployed on surge at the following address:
 
-If you wish to install it, can be accessed from my git hub site at:  
+    http://malicious-peace.surge.sh/
 
-  https://github.com/DrPsyFi/ajaxBack
+If you wish to install it, it can be accessed from my git hub site.  
 
-  https://github.com/DrPsyFi/Q2FrontEnd
+    npm install
+    npm node run - to start application
+   
+    
+The DB is PSQL
 
-  npm install
+  Create a database with the the following CLI Commands
+  
+    createdb recipeBox_dev
+    
+   Migrate and Seed files
+   
+    npm run knex migrate:latest
+    
+    npm run knex seed:run
+___
 
-  npm node run - to start application
+If you require any further assistance please feel free to contact me at My Git Hub Site
+
+### Happy Eating!!!
+  
+    
+    
